@@ -1,0 +1,87 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: ingress-service
+  annotations:
+    kubernetes.io/ingress.class: nginx
+    nginx.ingress.kubernetes.io/use-regex: "true"
+spec:
+#  tls:
+ # - hosts:
+  #  - just1cube.com
+   # secretName: tls-ingress
+  rules:
+#    - host: 192.168.1.132
+    #- host: just1cube.com
+#ticketing.dev
+ #     http:
+    -  http:  
+        paths:
+          - path: /api/payments
+            pathType: Prefix
+            backend:
+              service:
+                 name: payments-srv
+                 port: 
+                   number: 3000
+          - path: /api/users
+            pathType: Prefix
+            backend:
+              service:
+                name: auth-srv
+                port: 
+                  number: 3000
+          - path: /api/tickets
+            pathType: Prefix
+            backend:
+              service:
+                 name: tickets-srv
+                 port:
+                    number: 3000
+          - path: /api/orders
+            pathType: Prefix
+            backend:
+              service:
+                   name: orders-srv
+                   port:
+                      number: 3000
+   #       - path: /
+#client
+    #        pathType: Prefix
+     #       backend:
+      #        service:
+       #         name: client-srv
+        #        port: 
+         #               number: 3000
+        #  - path: /nginx
+       #     pathType: Prefix
+#/?(.*)
+           # backend:
+          #      service:
+         #        name: nginxtest
+        #         port:
+       #                 number: 80
+      #    - path: /nextjs
+     #       pathType: Prefix
+          
+    #        backend: 
+   #            service:
+  #               name: tes-client-srv
+ #                port:
+#                    number: 3000
+          - path: /
+            pathType: Prefix
+#Exact
+#Prefix
+            backend:
+              service:
+               name: client-srv
+               port:
+                 number: 3000
+
+
+
+
+
+
+
